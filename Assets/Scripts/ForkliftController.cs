@@ -18,7 +18,7 @@ public class ForkliftController : MonoBehaviour
     private bool armIsMoving = false;
     private bool armIsLifted = false;
     private float liftTimer = 0;
-    private float liftDelay = 1.3f;
+    private float liftDelay = 3f;
     private float maxBreakTorque = 100;
     private float topSpeed = 150;
     [SerializeField] private float currentSpeed;
@@ -37,7 +37,7 @@ public class ForkliftController : MonoBehaviour
 
     private void Update()
     {
-        UpdateWheelPositions();
+        //UpdateWheelPositions();
 
         float rotationThisFrame = 360 * Time.deltaTime;
         wheelTransformFL.Rotate(0, -wheelFL.rpm / rotationThisFrame, 0);
