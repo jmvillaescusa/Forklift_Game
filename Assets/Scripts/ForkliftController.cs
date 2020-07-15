@@ -18,8 +18,8 @@ public class ForkliftController : MonoBehaviour
     [SerializeField] private float currentSpeed;
     private float decelerationTorque = 30;
     private float spoilerRatio = 0.1f;
-    private float maxTurnAngle = 10;
-    private float maxTorque = 10;
+    private float maxTurnAngle = 30;
+    private float maxTorque = 30;
     private Vector3 centerOfMassAdjustment = new Vector3(0f, -0.5f, 0f);
     private Rigidbody body;
 
@@ -53,6 +53,8 @@ public class ForkliftController : MonoBehaviour
             wheelRL.motorTorque = 0;
             wheelRR.motorTorque = 0;
         }
+
+        
 
         Vector3 localVelocity = transform.InverseTransformDirection(body.velocity);
         body.AddForce(-transform.up * (localVelocity.z * spoilerRatio), ForceMode.Impulse);
