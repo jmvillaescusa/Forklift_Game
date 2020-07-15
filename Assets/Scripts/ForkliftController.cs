@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ForkliftController : MonoBehaviour
 {
+    public Transform arms;
     public Transform forklift;
     public WheelCollider wheelFL;
     public WheelCollider wheelFR;
@@ -14,13 +15,16 @@ public class ForkliftController : MonoBehaviour
     public Transform wheelTransformRL;
     public Transform wheelTransformRR;
 
+    private bool armIsMoving = false;
+    private bool armIsLifted = false;
+    private float liftTimer = 0;
+    private float liftDelay = 1.3f;
     private float maxBreakTorque = 100;
-    private bool applyHandBrake = false;
     private float topSpeed = 150;
     [SerializeField] private float currentSpeed;
     private float decelerationTorque = 30;
     private float spoilerRatio = 0.1f;
-    private float maxTurnAngle = 30;
+    private float maxTurnAngle = 20;
     private float maxTorque = 30;
     private Vector3 centerOfMassAdjustment = new Vector3(0f, -0.5f, 0f);
     private Rigidbody body;
@@ -40,6 +44,43 @@ public class ForkliftController : MonoBehaviour
         wheelTransformFR.Rotate(0, -wheelFR.rpm / rotationThisFrame, 0);
         wheelTransformRL.Rotate(0, -wheelRL.rpm / rotationThisFrame, 0);
         wheelTransformRR.Rotate(0, -wheelRR.rpm / rotationThisFrame, 0);
+
+        if (Input.GetKeyDown(KeyCode.E) || armIsMoving)
+        {
+            if (!armIsMoving)
+            {
+                armIsMoving = true;
+                liftTimer = 0;
+            }
+            else
+            {
+                if (liftTimer >= liftDelay && !armIsLifted)
+                {
+                    armIsLifted = true;
+                    armIsMoving = false;
+                }
+                else if (liftTimer >= liftDelay && armIsLifted)
+                {
+                    armIsLifted = false;
+                    armIsMoving = false;
+                }
+                else
+                {
+                    if (!armIsLifted)
+                    {
+                        arms.Translate(Vector3.up * Time.deltaTime * 0.5f);
+                    }
+                    else
+                    {
+                        arms.Translate(-Vector3.up * Time.deltaTime * 0.5f);
+                    }
+
+                    liftTimer += Time.deltaTime;
+                }
+                
+            }
+            Debug.Log(liftTimer);
+        }
     }
 
     private void FixedUpdate()
@@ -67,13 +108,11 @@ public class ForkliftController : MonoBehaviour
 
         if(Input.GetButton("Jump"))
         {
-            applyHandBrake = true;
             wheelFL.brakeTorque = maxBreakTorque;
             wheelFR.brakeTorque = maxBreakTorque;
         }
         else
         {
-            applyHandBrake = false;
             wheelFL.brakeTorque = 0;
             wheelFR.brakeTorque = 0;
         }
