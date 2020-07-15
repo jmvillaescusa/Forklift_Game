@@ -14,6 +14,8 @@ public class ForkliftController : MonoBehaviour
     public Transform wheelTransformRL;
     public Transform wheelTransformRR;
 
+    private float maxBreakTorque = 100;
+    private bool applyHandBrake = false;
     private float topSpeed = 150;
     [SerializeField] private float currentSpeed;
     private float decelerationTorque = 30;
@@ -54,8 +56,6 @@ public class ForkliftController : MonoBehaviour
             wheelRR.motorTorque = 0;
         }
 
-        
-
         Vector3 localVelocity = transform.InverseTransformDirection(body.velocity);
         body.AddForce(-transform.up * (localVelocity.z * spoilerRatio), ForceMode.Impulse);
 
@@ -64,6 +64,19 @@ public class ForkliftController : MonoBehaviour
 
         wheelRL.motorTorque = Input.GetAxis("Vertical") * maxTorque;
         wheelRR.motorTorque = Input.GetAxis("Vertical") * maxTorque;
+
+        if(Input.GetButton("Jump"))
+        {
+            applyHandBrake = true;
+            wheelFL.brakeTorque = maxBreakTorque;
+            wheelFR.brakeTorque = maxBreakTorque;
+        }
+        else
+        {
+            applyHandBrake = false;
+            wheelFL.brakeTorque = 0;
+            wheelFR.brakeTorque = 0;
+        }
 
         if (Input.GetAxis("Vertical") <= -0.5f && localVelocity.z > 0)
         {
