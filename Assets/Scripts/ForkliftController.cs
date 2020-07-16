@@ -21,8 +21,8 @@ public class ForkliftController : MonoBehaviour
     [SerializeField] private float currentSpeed;
     private float decelerationTorque = 30;
     private float spoilerRatio = 0.1f;
-    private float maxTurnAngle = 20;
-    private float maxTorque = 30;
+    private float maxTurnAngle = 30;
+    private float maxTorque = 40;
     private Vector3 centerOfMassAdjustment = new Vector3(0f, -0.5f, 0f);
     private Rigidbody body;
 
@@ -34,7 +34,7 @@ public class ForkliftController : MonoBehaviour
 
     private void Update()
     {
-        //UpdateWheelPositions();
+        UpdateWheelPositions();
 
         float rotationThisFrame = 360 * Time.deltaTime;
         wheelTransformFL.Rotate(0, -wheelFL.rpm / rotationThisFrame, 0);
@@ -42,13 +42,13 @@ public class ForkliftController : MonoBehaviour
         wheelTransformRL.Rotate(0, -wheelRL.rpm / rotationThisFrame, 0);
         wheelTransformRR.Rotate(0, -wheelRR.rpm / rotationThisFrame, 0);
 
-        if (Input.GetKey(KeyCode.E) && arms.transform.localPosition.y <= 3.0f)
+        if (Input.GetKey(KeyCode.E) && arms.transform.localPosition.y <= 3.7f)
         {
-            arms.Translate(Vector3.up * Time.deltaTime * 0.5f);
+            arms.Translate(Vector3.up * Time.deltaTime * 0.75f);
         }
         if (Input.GetKey(KeyCode.R) && arms.transform.localPosition.y >= 0.2f)
         {
-            arms.Translate(-Vector3.up * Time.deltaTime * 0.5f);
+            arms.Translate(-Vector3.up * Time.deltaTime * 0.75f);
         }
     }
 
