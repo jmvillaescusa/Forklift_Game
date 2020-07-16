@@ -15,10 +15,7 @@ public class ForkliftController : MonoBehaviour
     public Transform wheelTransformRL;
     public Transform wheelTransformRR;
 
-    private bool armIsMoving = false;
     private bool armIsLifted = false;
-    private float liftTimer = 0;
-    private float liftDelay = 3f;
     private float maxBreakTorque = 100;
     private float topSpeed = 150;
     [SerializeField] private float currentSpeed;
@@ -45,41 +42,13 @@ public class ForkliftController : MonoBehaviour
         wheelTransformRL.Rotate(0, -wheelRL.rpm / rotationThisFrame, 0);
         wheelTransformRR.Rotate(0, -wheelRR.rpm / rotationThisFrame, 0);
 
-        if (Input.GetKeyDown(KeyCode.E) || armIsMoving)
+        if (Input.GetKey(KeyCode.E) && arms.transform.localPosition.y <= 3.0f)
         {
-            if (!armIsMoving)
-            {
-                armIsMoving = true;
-                liftTimer = 0;
-            }
-            else
-            {
-                if (liftTimer >= liftDelay && !armIsLifted)
-                {
-                    armIsLifted = true;
-                    armIsMoving = false;
-                }
-                else if (liftTimer >= liftDelay && armIsLifted)
-                {
-                    armIsLifted = false;
-                    armIsMoving = false;
-                }
-                else
-                {
-                    if (!armIsLifted)
-                    {
-                        arms.Translate(Vector3.up * Time.deltaTime * 0.5f);
-                    }
-                    else
-                    {
-                        arms.Translate(-Vector3.up * Time.deltaTime * 0.5f);
-                    }
-
-                    liftTimer += Time.deltaTime;
-                }
-                
-            }
-            Debug.Log(liftTimer);
+            arms.Translate(Vector3.up * Time.deltaTime * 0.5f);
+        }
+        if (Input.GetKey(KeyCode.R) && arms.transform.localPosition.y >= 0.2f)
+        {
+            arms.Translate(-Vector3.up * Time.deltaTime * 0.5f);
         }
     }
 
