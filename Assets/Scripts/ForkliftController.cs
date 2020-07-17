@@ -16,7 +16,6 @@ public class ForkliftController : MonoBehaviour
     public Transform wheelTransformRL;
     public Transform wheelTransformRR;
 
-    private bool armIsLifted = false;
     private float maxBreakTorque = 100;
     private float topSpeed = 150;
     [SerializeField] private float currentSpeed;
@@ -24,7 +23,7 @@ public class ForkliftController : MonoBehaviour
     private float spoilerRatio = 0.1f;
     private float maxTurnAngle = 30;
     private float maxTorque = 40;
-    private Vector3 centerOfMassAdjustment = new Vector3(0f, -0.5f, 0f);
+    private Vector3 centerOfMassAdjustment = new Vector3(0f, -0.9f, 0f);
     private Rigidbody body;
 
     private void Start()
