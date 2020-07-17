@@ -5,6 +5,7 @@ using UnityEngine;
 public class ForkliftController : MonoBehaviour
 {
     public Transform arms;
+    public Transform armExt;
     public Transform forklift;
     public WheelCollider wheelFL;
     public WheelCollider wheelFR;
@@ -44,11 +45,19 @@ public class ForkliftController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.E) && arms.transform.localPosition.y <= 3.7f)
         {
-            arms.Translate(Vector3.up * Time.deltaTime * 0.75f);
+            arms.Translate(Vector3.up * Time.deltaTime);
+            if (arms.transform.localPosition.y > armExt.transform.localPosition.y + 0.5f)
+            {
+                armExt.Translate(Vector3.up * Time.deltaTime);
+            }
         }
         if (Input.GetKey(KeyCode.R) && arms.transform.localPosition.y >= 0.2f)
         {
-            arms.Translate(-Vector3.up * Time.deltaTime * 0.75f);
+            arms.Translate(-Vector3.up * Time.deltaTime);
+            if (arms.transform.localPosition.y > 2.3f)
+            {
+                armExt.Translate(-Vector3.up * Time.deltaTime);
+            }
         }
     }
 
