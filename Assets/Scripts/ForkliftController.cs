@@ -16,6 +16,8 @@ public class ForkliftController : MonoBehaviour
     public Transform wheelTransformRL;
     public Transform wheelTransformRR;
 
+    private float armsMinYPos;
+    private float armsMaxYPos;
     private float maxBreakTorque = 100;
     private float topSpeed = 150;
     [SerializeField] private float currentSpeed;
@@ -30,6 +32,9 @@ public class ForkliftController : MonoBehaviour
     {
         body = GetComponent<Rigidbody>();
         body.centerOfMass += centerOfMassAdjustment;
+
+        armsMinYPos = arms.transform.position.y;
+        armsMaxYPos = arms.transform.position.y + 3.7f;
     }
 
     private void Update()
@@ -42,7 +47,7 @@ public class ForkliftController : MonoBehaviour
         wheelTransformRL.Rotate(0, -wheelRL.rpm / rotationThisFrame, 0);
         wheelTransformRR.Rotate(0, -wheelRR.rpm / rotationThisFrame, 0);
 
-        if (Input.GetKey(KeyCode.E) && arms.transform.localPosition.y <= 3.7f)
+        if (Input.GetKey(KeyCode.E) && arms.transform.localPosition.y <= armsMaxYPos)
         {
             arms.Translate(Vector3.up * Time.deltaTime);
             if (arms.transform.localPosition.y > armExt.transform.localPosition.y + 0.5f)
@@ -50,7 +55,7 @@ public class ForkliftController : MonoBehaviour
                 armExt.Translate(Vector3.up * Time.deltaTime);
             }
         }
-        if (Input.GetKey(KeyCode.R) && arms.transform.localPosition.y >= 0.2f)
+        if (Input.GetKey(KeyCode.R) && arms.transform.localPosition.y >= armsMinYPos)
         {
             arms.Translate(-Vector3.up * Time.deltaTime);
             if (arms.transform.localPosition.y > 2.3f)
