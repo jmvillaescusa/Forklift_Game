@@ -5,10 +5,19 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Transform forklift;
-    private float speed = 100;
+    private float speed = 70;
+
+    private int zoom = 20;
+    private int normal = 60;
+    private float smooth = 2.5f;
+
+    private bool isZoomed = false;
+    public new Camera camera;
 
     private void Update()
     {
+        transform.position = new Vector3(forklift.position.x, forklift.position.y + 5f, forklift.position.z); 
+
         if (Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))
         {
             transform.Rotate(0, speed * Time.deltaTime, 0);
@@ -19,6 +28,18 @@ public class CameraController : MonoBehaviour
             transform.Rotate(0, -speed * Time.deltaTime, 0);
         }
 
-        transform.position = forklift.position;
+        if (Input.GetMouseButtonDown(1))
+        {
+            isZoomed = !isZoomed;
+        }
+
+        if (Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.DownArrow))
+        {
+            camera.GetComponent<Camera>().fieldOfView = Mathf.Lerp(camera.GetComponent<Camera>().fieldOfView, zoom, Time.deltaTime * smooth);
+        }
+        if (Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.UpArrow))
+        {
+            camera.GetComponent<Camera>().fieldOfView = Mathf.Lerp(camera.GetComponent<Camera>().fieldOfView, normal, Time.deltaTime * smooth); 
+        }
     }
 }

@@ -566,7 +566,7 @@ Transform:
   m_GameObject: {fileID: 564181725}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.51, y: 0, z: -3.211}
-  m_LocalScale: {x: 9.220763, y: 0.25, z: 21.403753}
+  m_LocalScale: {x: 26.478342, y: 0.25, z: 33.88214}
   m_Children: []
   m_Father: {fileID: 1479842436}
   m_RootOrder: 6
@@ -774,7 +774,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: 4, z: -3}
+  m_LocalPosition: {x: 0, y: 2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2104607785}
@@ -1387,10 +1387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forklift: {fileID: 855623368}
-  distance: 5
-  height: 5
-  rotationDamping: 3
-  heightDamping: 2
+  camera: {fileID: 963194227}
 --- !u!4 &2104607785
 Transform:
   m_ObjectHideFlags: 0
