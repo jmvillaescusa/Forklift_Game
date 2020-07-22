@@ -25,7 +25,7 @@ public class ForkliftController : MonoBehaviour
     private float spoilerRatio = 0.1f;
     private float maxTurnAngle = 30;
     private float maxTorque = 40;
-    private Vector3 centerOfMassAdjustment = new Vector3(0f, -0.9f, 0f);
+    private Vector3 centerOfMassAdjustment = new Vector3(0f, -1f, 0f);
     private Rigidbody body;
 
     private void Start()
@@ -125,6 +125,7 @@ public class ForkliftController : MonoBehaviour
             Vector3 temp = wheelFL.transform.position;
             temp.y = (contact.point + (wheelFL.transform.up * wheelFL.radius)).y;
             wheelTransformFL.position = temp;
+            Debug.Log("Test FL");
         }
 
         if (wheelFR.GetGroundHit(out contact))
@@ -132,6 +133,7 @@ public class ForkliftController : MonoBehaviour
             Vector3 temp = wheelFR.transform.position;
             temp.y = (contact.point + (wheelFR.transform.up * wheelFR.radius)).y;
             wheelTransformFR.position = temp;
+            Debug.Log("Test FR");
         }
 
         if (wheelRL.GetGroundHit(out contact))
@@ -139,6 +141,7 @@ public class ForkliftController : MonoBehaviour
             Vector3 temp = wheelRL.transform.position;
             temp.y = (contact.point + (wheelRL.transform.up * wheelRL.radius)).y;
             wheelTransformRL.position = temp;
+            Debug.Log("Test RL");
         }
 
         if (wheelRR.GetGroundHit(out contact))
@@ -146,6 +149,7 @@ public class ForkliftController : MonoBehaviour
             Vector3 temp = wheelRR.transform.position;
             temp.y = (contact.point + (wheelRR.transform.up * wheelRR.radius)).y;
             wheelTransformRR.position = temp;
+            Debug.Log("Test RR");
         }
     }
 }
