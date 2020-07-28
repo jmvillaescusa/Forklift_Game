@@ -22,9 +22,9 @@ public class ForkliftController : MonoBehaviour
     private float topSpeed = 150;
     [SerializeField] private float currentSpeed;
     private float decelerationTorque = 30;
-    private float spoilerRatio = 0.1f;
-    private float maxTurnAngle = 30;
-    private float maxTorque = 40;
+    private float spoilerRatio = 1f;
+    private float maxTurnAngle = 50;
+    private float maxTorque = 250;
     private Vector3 centerOfMassAdjustment = new Vector3(0f, -1f, 0f);
     private Rigidbody body;
 
