@@ -19,12 +19,12 @@ public class ForkliftController : MonoBehaviour
     private float armsMinYPos;
     private float armsMaxYPos;
     private float maxBreakTorque = 100;
-    private float topSpeed = 150;
+    private float topSpeed = 20;
     [SerializeField] private float currentSpeed;
     private float decelerationTorque = 30;
     private float spoilerRatio = 1f;
     private float maxTurnAngle = 50;
-    private float maxTorque = 250;
+    private float maxTorque = 300;
     private Vector3 centerOfMassAdjustment = new Vector3(0f, -1f, 0f);
     private Rigidbody body;
 
@@ -67,28 +67,28 @@ public class ForkliftController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        currentSpeed = wheelRL.radius * wheelRL.rpm * Mathf.PI * 0.12f;
-        if (currentSpeed < topSpeed)
-        {
-            wheelRL.motorTorque = Input.GetAxis("Vertical") * maxTorque;
-            wheelRR.motorTorque = Input.GetAxis("Vertical") * maxTorque;
-        }
-        else
-        {
-            wheelRL.motorTorque = 0;
-            wheelRR.motorTorque = 0;
-        }
+        //currentSpeed = wheelRL.radius * wheelRL.rpm * Mathf.PI * 0.12f;
+        //if (currentSpeed < topSpeed)
+        //{
+        //    wheelRL.motorTorque = Input.GetAxis("Vertical") * maxTorque;
+        //    wheelRR.motorTorque = Input.GetAxis("Vertical") * maxTorque;
+        //}
+        //else
+        //{
+        //    wheelRL.motorTorque = 0;
+        //    wheelRR.motorTorque = 0;
+        //}
 
         Vector3 localVelocity = transform.InverseTransformDirection(body.velocity);
         body.AddForce(-transform.up * (localVelocity.z * spoilerRatio), ForceMode.Impulse);
 
-        wheelFL.steerAngle = Input.GetAxis("Horizontal") *maxTurnAngle;
-        wheelFR.steerAngle = Input.GetAxis("Horizontal") *maxTurnAngle;
+        wheelFL.steerAngle = Input.GetAxis("Horizontal") * maxTurnAngle;
+        wheelFR.steerAngle = Input.GetAxis("Horizontal") * maxTurnAngle;
 
         wheelRL.motorTorque = Input.GetAxis("Vertical") * maxTorque;
         wheelRR.motorTorque = Input.GetAxis("Vertical") * maxTorque;
 
-        if(Input.GetButton("Jump"))
+        if (Input.GetButton("Jump"))
         {
             wheelFL.brakeTorque = maxBreakTorque;
             wheelFR.brakeTorque = maxBreakTorque;
