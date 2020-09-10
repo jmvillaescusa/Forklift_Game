@@ -21,7 +21,7 @@ public class ForkliftController : MonoBehaviour
     private float maxBreakTorque = 1000;
     private float topSpeed = 20;
     [SerializeField] private float currentSpeed;
-    private float decelerationTorque = 750;
+    private float decelerationTorque = 1500;
     private float spoilerRatio = 1f;
     private float maxTurnAngle = 30;
     private float maxTorque = 300;
@@ -67,17 +67,17 @@ public class ForkliftController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //currentSpeed = wheelRL.radius * wheelRL.rpm * Mathf.PI * 0.12f;
-        //if (currentSpeed < topSpeed)
-        //{
-        //    wheelRL.motorTorque = Input.GetAxis("Vertical") * maxTorque;
-        //    wheelRR.motorTorque = Input.GetAxis("Vertical") * maxTorque;
-        //}
-        //else
-        //{
-        //    wheelRL.motorTorque = 0;
-        //    wheelRR.motorTorque = 0;
-        //}
+        currentSpeed = wheelRL.radius * wheelRL.rpm * Mathf.PI * 0.12f;
+        if (currentSpeed < topSpeed)
+        {
+            wheelRL.motorTorque = Input.GetAxis("Vertical") * maxTorque;
+            wheelRR.motorTorque = Input.GetAxis("Vertical") * maxTorque;
+        }
+        else
+        {
+            wheelRL.motorTorque = 0;
+            wheelRR.motorTorque = 0;
+        }
 
         Vector3 localVelocity = transform.InverseTransformDirection(body.velocity);
         body.AddForce(-transform.up * (localVelocity.z * spoilerRatio), ForceMode.Impulse);
@@ -106,7 +106,6 @@ public class ForkliftController : MonoBehaviour
         }
         else if (Input.GetAxis("Vertical") == 0)
         {
-            Debug.Log("Test");
             wheelRL.brakeTorque = decelerationTorque;
             wheelRR.brakeTorque = decelerationTorque;
         }
@@ -126,7 +125,6 @@ public class ForkliftController : MonoBehaviour
             Vector3 temp = wheelFL.transform.position;
             temp.y = (contact.point + (wheelFL.transform.up * wheelFL.radius)).y;
             wheelTransformFL.position = temp;
-            //Debug.Log("Test FL");
         }
 
         if (wheelFR.GetGroundHit(out contact))
@@ -134,7 +132,6 @@ public class ForkliftController : MonoBehaviour
             Vector3 temp = wheelFR.transform.position;
             temp.y = (contact.point + (wheelFR.transform.up * wheelFR.radius)).y;
             wheelTransformFR.position = temp;
-            //Debug.Log("Test FR");
         }
 
         if (wheelRL.GetGroundHit(out contact))
@@ -142,7 +139,6 @@ public class ForkliftController : MonoBehaviour
             Vector3 temp = wheelRL.transform.position;
             temp.y = (contact.point + (wheelRL.transform.up * wheelRL.radius)).y;
             wheelTransformRL.position = temp;
-            //Debug.Log("Test RL");
         }
 
         if (wheelRR.GetGroundHit(out contact))
@@ -150,7 +146,6 @@ public class ForkliftController : MonoBehaviour
             Vector3 temp = wheelRR.transform.position;
             temp.y = (contact.point + (wheelRR.transform.up * wheelRR.radius)).y;
             wheelTransformRR.position = temp;
-            //Debug.Log("Test RR");
         }
     }
 }
