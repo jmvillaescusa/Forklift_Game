@@ -7,7 +7,7 @@ public class BoxCount : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -20,7 +20,7 @@ public class BoxCount : MonoBehaviour
     {
         if (other.gameObject.tag == "Box")
         {
-            Debug.Log("Test");
+            //Debug.Log("Test");
         }
     }
 
@@ -28,7 +28,7 @@ public class BoxCount : MonoBehaviour
     {
         if (other.gameObject.tag == "Box")
         {
-            Debug.Log("Test 2");
+            //Debug.Log("Test 2");
         }
     }
 }
