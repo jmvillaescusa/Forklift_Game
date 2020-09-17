@@ -10,6 +10,8 @@ public class BoxCollision : MonoBehaviour
     private float distance;
     private Vector3 direction;
 
+    public Boolean onSkid;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +27,11 @@ public class BoxCollision : MonoBehaviour
         if (Physics.Raycast(ray, out rayHit)) {
             if(rayHit.transform.tag == "Skid" && rayHit.distance <= distance)
             {
-                Debug.Log("Test");
+                onSkid = true;
+            }
+            else
+            {
+                onSkid = false;
             }
         }
     }
