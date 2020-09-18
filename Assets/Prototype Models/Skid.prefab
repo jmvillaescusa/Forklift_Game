@@ -405,7 +405,7 @@ Transform:
   - {fileID: 8133386004762559310}
   - {fileID: 8133386004787869639}
   - {fileID: 438494978142939845}
-  - {fileID: 1573534636328648227}
+  - {fileID: 6259471823168954305}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -437,8 +437,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9357476fe5d435f4aa47edf276db27e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Box: {fileID: 2733790564252277661, guid: bdf3e7ecc4e2cf14ba2965be8dc0bfad, type: 3}
---- !u!1 &8766659111274213313
+  test: 0
+  Box: {fileID: 0}
+--- !u!1 &8948099649177354615
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -446,8 +447,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1573534636328648227}
-  - component: {fileID: 3859271283363871992}
+  - component: {fileID: 6259471823168954305}
+  - component: {fileID: 2401671094183131325}
   m_Layer: 0
   m_Name: CollisionTrigger
   m_TagString: Untagged
@@ -455,30 +456,30 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1573534636328648227
+--- !u!4 &6259471823168954305
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8766659111274213313}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_GameObject: {fileID: 8948099649177354615}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8133386004922000880}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3859271283363871992
+--- !u!65 &2401671094183131325
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8766659111274213313}
+  m_GameObject: {fileID: 8948099649177354615}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.25, z: 0.9}
-  m_Center: {x: 0, y: 0.1, z: 0}
+  m_Size: {x: 0.9, y: 0.1, z: 0.9}
+  m_Center: {x: 0, y: 0.15, z: 0}

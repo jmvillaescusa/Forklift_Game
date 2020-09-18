@@ -4,24 +4,28 @@ using UnityEngine;
 
 public class BoxCount : MonoBehaviour
 {
-    public BoxCollision Box;
+    public bool test;
+    public List<GameObject> boxes;
+    private GameObject tempBox;
+
+    private int boxCount;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        boxCount = 0;
+        if (boxes == null)
+        {
+            boxes = new List<GameObject>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Box.onSkid)
-        {
-            Debug.Log("test skid");
-        }
-        else
-        {
-            Debug.Log("test");
+        Debug.Log(boxCount);
+        foreach (GameObject box in boxes) {
+
         }
     }
 }
